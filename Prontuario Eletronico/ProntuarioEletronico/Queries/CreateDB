@@ -1,0 +1,36 @@
+CREATE TABLE Paciente (
+  idPaciente serial  NOT NULL ,
+  Nome VARCHAR(30)   NOT NULL ,
+  Sexo CHAR(1)   NOT NULL ,
+  DataNascimento DATE   NOT NULL ,
+  Endereco VARCHAR(50)   NOT NULL ,
+  Telefone CHAR(14)    ,
+  NumCelular CHAR(14)    ,
+  Email VARCHAR(30)      ,
+PRIMARY KEY(idPaciente));
+
+CREATE TABLE Consulta (
+  CRM INTEGER   NOT NULL,
+  idPaciente INTEGER   NOT NULL,
+  DataConsulta DATE   NOT NULL,
+  Descricao VARCHAR(200)   NOT NULL,
+  PRIMARY KEY(CRM, idPaciente, DataConsulta),
+  FOREIGN KEY(CRM) REFERENCES Medico(CRM),
+  FOREIGN KEY(idPaciente) REFERENCES Paciente(idPaciente)
+);
+
+CREATE TABLE Medico (
+  CRM INTEGER   NOT NULL,
+  Nome VARCHAR(30)   NOT NULL,
+  CPF CHAR(14)   NOT NULL,
+  Email VARCHAR(30)   NOT NULL,
+  NumCelular CHAR(14)   NOT NULL,
+  DataNascimento DATE   NOT NULL,
+  Senha VARCHAR(20)   NOT NULL,
+  PRIMARY KEY(CRM)
+);
+
+insert into Medico(CRM, Nome, CPF, Email, NumCelular, DataNascimento, Senha) 
+values(1, 'Lucas', '05544433322211', 'lucas@ifs.br', '988887777', '1994-02-28', '123')
+
+select * from Medico
